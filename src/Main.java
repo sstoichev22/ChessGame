@@ -1,5 +1,17 @@
+import javax.swing.*;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello, world!");
+        JFrame frame = new JFrame("Chess Game");
+        Input input = new Input();
+        GamePanel gamePanel = new GamePanel(input, 800, 800);
+        frame.add(gamePanel);
+
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+        gamePanel.startGameThread();
     }
 }
