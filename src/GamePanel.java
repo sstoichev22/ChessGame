@@ -1,5 +1,8 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+import java.util.Objects;
 
 public class GamePanel extends JPanel implements Runnable{
     Thread gameThread;
@@ -7,6 +10,7 @@ public class GamePanel extends JPanel implements Runnable{
     int screenWidth, screenHeight, tileSize;
     Color tileColor1, tileColor2;
     GamePanel(Input input, int screenWidth, int screenHeight){
+        initImages();
         this.input = input;
         setGameSize(this.screenWidth = screenWidth, this.screenHeight = screenHeight);
         tileSize = 100;
@@ -49,6 +53,7 @@ public class GamePanel extends JPanel implements Runnable{
     }
     public void paintComponent(Graphics g){
         super.paintComponent(g);
+        g.drawImage(ImageManager.bB, 0, 0, 100, 100, null);
         paintTiles(g);
         paintCoords(g);
     }
@@ -85,5 +90,10 @@ public class GamePanel extends JPanel implements Runnable{
     public void startGameThread(){
         gameThread = new Thread(this);
         gameThread.start();
+    }
+    private void initImages(){
+        try{
+            ImageManager.bB = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/bB.svg")));
+        }catch(IOException ignored){}
     }
 }
