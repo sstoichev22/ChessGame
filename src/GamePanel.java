@@ -1,6 +1,7 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -9,6 +10,8 @@ public class GamePanel extends JPanel implements Runnable{
     Input input;
     int screenWidth, screenHeight, tileSize;
     Color tileColor1, tileColor2;
+    //starting pos: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"
+    String FEN = "3r3K/8/4brKp/ppp3pp/8/8/8/8";
     GamePanel(Input input, int screenWidth, int screenHeight){
         initImages();
         this.input = input;
@@ -53,10 +56,43 @@ public class GamePanel extends JPanel implements Runnable{
     }
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        g.drawImage(ImageManager.bB, 0, 0, 100, 100, null);
         paintTiles(g);
         paintCoords(g);
+        drawPieces(g);
     }
+    public void drawPieces(Graphics g) {
+        for (int i = 0, r = 0, c = 0; i < FEN.length(); i++, c++) {
+            BufferedImage dp;
+            if (Character.isDigit(FEN.charAt(i))) {
+                c += FEN.charAt(i) - '0' - 1;
+                continue;
+            }
+            if (FEN.charAt(i) == '/') {
+                r++;
+                c = -1;
+                continue;
+            }
+            dp = switch (FEN.charAt(i)) {
+                case 'b' -> ImageManager.bB;
+                case 'k' -> ImageManager.bK;
+                case 'n' -> ImageManager.bN;
+                case 'p' -> ImageManager.bP;
+                case 'q' -> ImageManager.bQ;
+                case 'r' -> ImageManager.bR;
+                case 'B' -> ImageManager.wB;
+                case 'K' -> ImageManager.wK;
+                case 'N' -> ImageManager.wN;
+                case 'P' -> ImageManager.wP;
+                case 'Q' -> ImageManager.wQ;
+                case 'R' -> ImageManager.wR;
+                default -> null;
+            };
+            if (dp != null) {
+                g.drawImage(dp, tileSize * c, tileSize * r, tileSize, tileSize, null);
+            }
+        }
+    }
+
     private void paintTiles(Graphics g){
         for(int i = 0; i < 8; i++){
             for(int j = 0 ; j < 8; j++){
@@ -93,7 +129,19 @@ public class GamePanel extends JPanel implements Runnable{
     }
     private void initImages(){
         try{
-            ImageManager.bB = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/bB.svg")));
+            ImageManager.bB = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/BlackBishop.png")));
+            ImageManager.bK = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/BlackKing.png")));
+            ImageManager.bN = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/BlackKnight.png")));
+            ImageManager.bP = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/BlackPawn.png")));
+            ImageManager.bQ = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/BlackQueen.png")));
+            ImageManager.bR = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/BlackRook.png")));
+            ImageManager.wB = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/WhiteBishop.png")));
+            ImageManager.wK = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/WhiteKing.png")));
+            ImageManager.wN = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/WhiteKnight.png")));
+            ImageManager.wP = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/WhitePawn.png")));
+            ImageManager.wQ = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/WhiteQueen.png")));
+            ImageManager.wR = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/WhiteRook.png")));
+
         }catch(IOException ignored){}
     }
 }
