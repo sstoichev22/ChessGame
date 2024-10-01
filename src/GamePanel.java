@@ -3,6 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class GamePanel extends JPanel implements Runnable{
@@ -57,12 +58,27 @@ public class GamePanel extends JPanel implements Runnable{
     public void update(){
 
     }
+
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         paintTiles(g);
         paintCoords(g);
         drawPieces(g);
+        drawMoves(g);
     }
+
+    public void drawMoves(Graphics g){
+        if(selectedPiece != null){
+            ArrayList<int[]> moves = selectedPiece.getMoves();
+
+            for(int[] coord : moves){
+
+                g.drawImage(ImageManager.hawktuahcaptureonthatthang, coord[0]*100, coord[1]*100, tileSize, tileSize, null);
+
+            }
+        }
+    }
+
     public void setBoard(){
         for (int i = 0, r = 0, c = 0; i < FEIN.length(); i++, c++) {
             if (Character.isDigit(FEIN.charAt(i))) {
@@ -195,6 +211,7 @@ public class GamePanel extends JPanel implements Runnable{
             ImageManager.wP = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/WhitePawn.png")));
             ImageManager.wQ = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/WhiteQueen.png")));
             ImageManager.wR = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/WhiteRook.png")));
+            ImageManager.hawktuahcaptureonthatthang = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/GreyCircle.png")));
 
         }catch(IOException ignored){}
     }

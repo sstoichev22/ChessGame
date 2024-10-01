@@ -10,6 +10,10 @@ public abstract class Piece {
         this.y = y;
     }
 
+    public ArrayList<int[]> getMoves(){
+        return new ArrayList<>();
+    }
+
     protected ArrayList<int[]> getDir(int sx, int sy, int stepx, int stepy){
         ArrayList<int[]> moves = new ArrayList<>();
         for(int x = sx + 1, y = sy + 1;x < 8 && y < 8;x += stepx, y += stepy){
