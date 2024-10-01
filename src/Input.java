@@ -2,6 +2,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class Input implements MouseListener {
+    GamePanel gamePanel;
+    public void setGamePanel(GamePanel gamePanel){
+        this.gamePanel = gamePanel;
+    }
     @Override
     public void mouseClicked(MouseEvent e) {
 
@@ -9,7 +13,7 @@ public class Input implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-
+        gamePanel.selectedPiece = Board.board[e.getY()][e.getX()];
     }
 
     @Override

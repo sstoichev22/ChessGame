@@ -1,9 +1,8 @@
 import java.util.ArrayList;
 
 public class Rook extends Piece{
-    int width = 100, height = 100;
-    Rook(int x, int y, boolean isWhite){
-        super(isWhite ? "wR" : "bR", x, y, isWhite);
+    Rook(char name, int x, int y){
+        super(name, x, y);
     }
 
     public ArrayList<int[]> getMoves(){
