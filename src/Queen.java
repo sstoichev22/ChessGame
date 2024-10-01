@@ -1,9 +1,8 @@
 import java.util.ArrayList;
 
 public class Queen extends Piece{
-    int width = 100, height = 100;
-    Queen(int x, int y, boolean isWhite){
-        super(isWhite ? "wQ" : "bQ", x, y, isWhite);
+    Queen(char name, int x, int y){
+        super(name, x, y);
     }
 
     public ArrayList<int[]> getMoves(){

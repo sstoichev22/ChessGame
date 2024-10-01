@@ -5,6 +5,7 @@ public class Main {
         JFrame frame = new JFrame("Chess Game");
         Input input = new Input();
         GamePanel gamePanel = new GamePanel(input, 800, 800);
+        input.setGamePanel(gamePanel);
         frame.add(gamePanel);
 
         frame.pack();

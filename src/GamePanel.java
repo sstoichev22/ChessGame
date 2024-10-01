@@ -11,7 +11,9 @@ public class GamePanel extends JPanel implements Runnable{
     int screenWidth, screenHeight, tileSize;
     Color tileColor1, tileColor2;
     //starting pos: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"
-    String FEN = "3r3K/8/4brKp/ppp3pp/8/8/8/8";
+    //test pos:"3r3K/8/4brKp/ppp3pp/1p1p1p1p/rRrR3R/bNnnNb2/bKqQk3"
+    String FEN = "3r3K/8/4brKp/ppp3pp/1p1p1p1p/rRrR3R/bNnnNb2/bKqQk3";
+    Piece selectedPiece = null;
     GamePanel(Input input, int screenWidth, int screenHeight){
         initImages();
         this.input = input;
@@ -19,6 +21,7 @@ public class GamePanel extends JPanel implements Runnable{
         tileSize = 100;
         tileColor1 = new Color(196, 164, 132);
         tileColor2 = new Color(92, 64, 51);
+        setBoard();
     }
     @Override
     public void run() {
@@ -59,6 +62,57 @@ public class GamePanel extends JPanel implements Runnable{
         paintTiles(g);
         paintCoords(g);
         drawPieces(g);
+    }
+    public void setBoard(){
+        for (int i = 0, r = 0, c = 0; i < FEN.length(); i++, c++) {
+            if (Character.isDigit(FEN.charAt(i))) {
+                c += FEN.charAt(i) - '0' - 1;
+                continue;
+            }
+            if (FEN.charAt(i) == '/') {
+                r++;
+                c = -1;
+                continue;
+            }
+            switch (FEN.charAt(i)) {
+                case 'b':
+                case 'B':
+                    Board.board[r][c] = new Bishop(FEN.charAt(i), r, c);
+                    break;
+                case 'k':
+                case 'K':
+                    Board.board[r][c] = new King(FEN.charAt(i), r, c);
+                    break;
+                case 'n':
+                case 'N':
+                    Board.board[r][c] = new Knight(FEN.charAt(i), r, c);
+                    break;
+                case 'p':
+                case 'P':
+                    Board.board[r][c] = new Pawn(FEN.charAt(i), r, c);
+                    break;
+                case 'q':
+                case 'Q':
+                    Board.board[r][c] = new Queen(FEN.charAt(i), r, c);
+                    break;
+                case 'r':
+                case 'R':
+                    Board.board[r][c] = new Rook(FEN.charAt(i), r, c);
+                    break;
+                default:
+                    Board.board[r][c] = null;
+            };
+        }
+    }
+    public String getFENString(){
+        StringBuilder fen = new StringBuilder();
+        for(int i = 0 ; i < 8; i++){
+            for(int j = 0 ; j < 8; j++){
+                fen.append(Board.board[i][j].name);
+            }
+        }
+        FEN = fen.toString();
+        return fen.toString();
     }
     public void drawPieces(Graphics g) {
         for (int i = 0, r = 0, c = 0; i < FEN.length(); i++, c++) {

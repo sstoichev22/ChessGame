@@ -2,15 +2,12 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public abstract class Piece {
-    String name;
-    int x, y, width, height;
-    BufferedImage bi;
-    boolean isWhite;
-    Piece(String name, int x, int y, boolean isWhite){
+    char name;
+    int x, y;
+    Piece(char name, int x, int y){
         this.name = name;
         this.x = x;
         this.y = y;
-        this.isWhite = isWhite;
     }
 
     protected ArrayList<int[]> getDir(int sx, int sy, int stepx, int stepy){

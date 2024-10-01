@@ -1,9 +1,8 @@
 import java.util.ArrayList;
 
 public class Bishop extends Piece{
-    int width = 100, height = 100;
-    Bishop(int x, int y, boolean isWhite){
-        super(isWhite ? "wB" : "bB", x, y, isWhite);
+    Bishop(char name, int x, int y){
+        super(name, x, y);
     }
 
     public ArrayList<int[]> getMoves(){
