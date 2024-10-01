@@ -12,7 +12,7 @@ public class GamePanel extends JPanel implements Runnable{
     Color tileColor1, tileColor2;
     //starting pos: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"
     //test pos:"3r3K/8/4brKp/ppp3pp/1p1p1p1p/rRrR3R/bNnnNb2/bKqQk3"
-    String FEN = "3r3K/8/4brKp/ppp3pp/1p1p1p1p/rRrR3R/bNnnNb2/bKqQk3";
+    String FEIN = "3r3K/8/4brKp/ppp3pp/1p1p1p1p/rRrR3R/bNnnNb2/bKqQk3";
     Piece selectedPiece = null;
     GamePanel(Input input, int screenWidth, int screenHeight){
         initImages();
@@ -64,40 +64,40 @@ public class GamePanel extends JPanel implements Runnable{
         drawPieces(g);
     }
     public void setBoard(){
-        for (int i = 0, r = 0, c = 0; i < FEN.length(); i++, c++) {
-            if (Character.isDigit(FEN.charAt(i))) {
-                c += FEN.charAt(i) - '0' - 1;
+        for (int i = 0, r = 0, c = 0; i < FEIN.length(); i++, c++) {
+            if (Character.isDigit(FEIN.charAt(i))) {
+                c += FEIN.charAt(i) - '0' - 1;
                 continue;
             }
-            if (FEN.charAt(i) == '/') {
+            if (FEIN.charAt(i) == '/') {
                 r++;
                 c = -1;
                 continue;
             }
-            switch (FEN.charAt(i)) {
+            switch (FEIN.charAt(i)) {
                 case 'b':
                 case 'B':
-                    Board.board[r][c] = new Bishop(FEN.charAt(i), r, c);
+                    Board.board[r][c] = new Bishop(FEIN.charAt(i), r, c);
                     break;
                 case 'k':
                 case 'K':
-                    Board.board[r][c] = new King(FEN.charAt(i), r, c);
+                    Board.board[r][c] = new King(FEIN.charAt(i), r, c);
                     break;
                 case 'n':
                 case 'N':
-                    Board.board[r][c] = new Knight(FEN.charAt(i), r, c);
+                    Board.board[r][c] = new Knight(FEIN.charAt(i), r, c);
                     break;
                 case 'p':
                 case 'P':
-                    Board.board[r][c] = new Pawn(FEN.charAt(i), r, c);
+                    Board.board[r][c] = new Pawn(FEIN.charAt(i), r, c);
                     break;
                 case 'q':
                 case 'Q':
-                    Board.board[r][c] = new Queen(FEN.charAt(i), r, c);
+                    Board.board[r][c] = new Queen(FEIN.charAt(i), r, c);
                     break;
                 case 'r':
                 case 'R':
-                    Board.board[r][c] = new Rook(FEN.charAt(i), r, c);
+                    Board.board[r][c] = new Rook(FEIN.charAt(i), r, c);
                     break;
                 default:
                     Board.board[r][c] = null;
@@ -111,22 +111,22 @@ public class GamePanel extends JPanel implements Runnable{
                 fen.append(Board.board[i][j].name);
             }
         }
-        FEN = fen.toString();
+        FEIN = fen.toString();
         return fen.toString();
     }
     public void drawPieces(Graphics g) {
-        for (int i = 0, r = 0, c = 0; i < FEN.length(); i++, c++) {
+        for (int i = 0, r = 0, c = 0; i < FEIN.length(); i++, c++) {
             BufferedImage dp;
-            if (Character.isDigit(FEN.charAt(i))) {
-                c += FEN.charAt(i) - '0' - 1;
+            if (Character.isDigit(FEIN.charAt(i))) {
+                c += FEIN.charAt(i) - '0' - 1;
                 continue;
             }
-            if (FEN.charAt(i) == '/') {
+            if (FEIN.charAt(i) == '/') {
                 r++;
                 c = -1;
                 continue;
             }
-            dp = switch (FEN.charAt(i)) {
+            dp = switch (FEIN.charAt(i)) {
                 case 'b' -> ImageManager.bB;
                 case 'k' -> ImageManager.bK;
                 case 'n' -> ImageManager.bN;
