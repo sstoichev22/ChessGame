@@ -13,7 +13,7 @@ public class GamePanel extends JPanel implements Runnable{
     Color tileColor1, tileColor2;
     //starting pos: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"
     //test pos:"3r3K/8/4brKp/ppp3pp/1p1p1p1p/rRrR3R/bNnnNb2/bKqQk3"
-    String FEIN = "3r3K/8/4brKp/ppp3pp/1p1p1p1p/rRrR3R/bNnnNb2/bKqQk3";
+    String FEIN = "3r3K/b5Bp/4brKp/ppp3pp/1p1p1p1p/rRrR3R/bNnnNb2/bKqQk3";
     Piece selectedPiece = null;
     GamePanel(Input input, int screenWidth, int screenHeight){
         initImages();
@@ -63,8 +63,9 @@ public class GamePanel extends JPanel implements Runnable{
         super.paintComponent(g);
         paintTiles(g);
         paintCoords(g);
-        drawPieces(g);
         drawMoves(g);
+        drawPieces(g);
+
     }
 
     public void drawMoves(Graphics g){
@@ -73,7 +74,7 @@ public class GamePanel extends JPanel implements Runnable{
 
             for(int[] coord : moves){
 
-                g.drawImage(ImageManager.hawktuahcaptureonthatthang, coord[0]*100, coord[1]*100, tileSize, tileSize, null);
+                g.drawImage(ImageManager.hawktuahcaptureonthatthang, (coord[1] - 1)*100, (coord[0] - 1)*100, tileSize, tileSize, null);
 
             }
         }
