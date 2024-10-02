@@ -56,7 +56,7 @@ public class GamePanel extends JPanel implements Runnable{
         }
     }
     public void update(){
-
+        FEIN = getFENString();
     }
 
     public void paintComponent(Graphics g){
@@ -67,6 +67,7 @@ public class GamePanel extends JPanel implements Runnable{
         drawPieces(g);
 
     }
+
 
     public void drawMoves(Graphics g){
         if(selectedPiece != null){
@@ -121,16 +122,36 @@ public class GamePanel extends JPanel implements Runnable{
             };
         }
     }
-    public String getFENString(){
+    public String getFENString() {
         StringBuilder fen = new StringBuilder();
-        for(int i = 0 ; i < 8; i++){
-            for(int j = 0 ; j < 8; j++){
-                fen.append(Board.board[i][j].name);
+
+        for (int i = 0; i < Board.board.length; i++) {
+            int emptyCount = 0;
+
+            for (int j = 0; j < Board.board[i].length; j++) {
+                if (Board.board[i][j] == null) {
+                    emptyCount++;
+                } else {
+                    if (emptyCount > 0) {
+                        fen.append(emptyCount);
+                        emptyCount = 0;
+                    }
+                    fen.append(Board.board[i][j].name);
+                }
+            }
+
+            if (emptyCount > 0) {
+                fen.append(emptyCount);
+            }
+
+            if (i < Board.board.length - 1) {
+                fen.append("/");
             }
         }
         FEIN = fen.toString();
         return fen.toString();
     }
+
     public void drawPieces(Graphics g) {
         for (int i = 0, r = 0, c = 0; i < FEIN.length(); i++, c++) {
             BufferedImage dp;
