@@ -13,9 +13,7 @@ public class Input implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if(Board.board[e.getY()/100][e.getX()/100] != null){
-            gamePanel.selectedPiece = Board.board[e.getY()/100][e.getX()/100];
-        }
+        gamePanel.selectedPiece = Board.board[e.getY()/100][e.getX()/100];
 
     }
 

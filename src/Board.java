@@ -1,3 +1,3 @@
 public class Board {
-    public static Piece[][] board = new Piece[8][8];
+    public static Piece[][] board = new Piece[9][9];
 }
