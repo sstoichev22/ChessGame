@@ -29,6 +29,8 @@ public class Input implements MouseListener {
                     Board.board[gamePanel.selectedPiece.x][gamePanel.selectedPiece.y] = null;
                     gamePanel.selectedPiece.x = mouseY/100;
                     gamePanel.selectedPiece.y = mouseX/100;
+                    if(gamePanel.selectedPiece instanceof Pawn) ((Pawn) gamePanel.selectedPiece).firstMove = false;
+
                     gamePanel.selectedPiece = null;
                     f = true;
                 }

@@ -13,7 +13,7 @@ public class GamePanel extends JPanel implements Runnable{
     Color tileColor1, tileColor2;
     //starting pos: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"
     //test pos:"3r3K/b5Bp/4brKp/ppp3pp/1p1p1p1p/rRrR3R/bNnnNb2/bKqQk3"
-    String FEIN = "8/1B6/8/8/8/8/5pb1/8";
+    String FEIN = "rnbqk3/1B6/7P/8/5K2/2n5/5pb1/8";
     Piece selectedPiece = null;
     GamePanel(Input input, int screenWidth, int screenHeight){
         initImages();
