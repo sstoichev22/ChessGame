@@ -1,5 +1,6 @@
 # ♟️ **Ultimate Chess Battle** 🎮
 
+(chatgpt generated)
 _A thrilling new chess experience like no other!_
 
 ![Chess Game Banner](https://example.com/chess-banner.png) <!-- Replace with your image link -->
