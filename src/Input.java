@@ -7,6 +7,7 @@ public class Input implements MouseListener {
     GamePanel gamePanel;
     int mouseX, mouseY;
     int Xoff = -10, Yoff = -30;
+    boolean whiteTurn = true;
     public void setGamePanel(GamePanel gamePanel){
         this.gamePanel = gamePanel;
     }
@@ -19,12 +20,12 @@ public class Input implements MouseListener {
     public void mousePressed(MouseEvent e) {
         mouseX = e.getX() + Xoff;
         mouseY = e.getY() + Yoff;
-        if(gamePanel.selectedPiece == null)
+        if(gamePanel.selectedPiece == null && Character.isUpperCase(Board.board[mouseY/100][mouseX/100].name) == whiteTurn)
             gamePanel.selectedPiece = Board.board[mouseY/100][mouseX/100];
         else{
             boolean f = false;
             for(int[] a : gamePanel.selectedPiece.getMoves()){
-                if(Arrays.equals(a, new int[]{mouseY / 100, mouseX / 100})) {
+                if(Arrays.equals(a, new int[]{mouseY / 100, mouseX / 100}) && ( Board.board[mouseY/100][mouseX/100] == null || Character.isUpperCase(Board.board[mouseY/100][mouseX/100].name) != Character.isUpperCase(Board.board[gamePanel.selectedPiece.y][gamePanel.selectedPiece.x].name))) {
                     Board.board[mouseY/100][mouseX/100] = gamePanel.selectedPiece;
                     Board.board[gamePanel.selectedPiece.x][gamePanel.selectedPiece.y] = null;
                     gamePanel.selectedPiece.x = mouseY/100;
@@ -33,6 +34,7 @@ public class Input implements MouseListener {
 
                     gamePanel.selectedPiece = null;
                     f = true;
+                    whiteTurn = !whiteTurn;
                 }
 
             }
