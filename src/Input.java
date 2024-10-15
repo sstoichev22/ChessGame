@@ -25,7 +25,7 @@ public class Input implements MouseListener {
         else{
             boolean f = false;
             for(int[] a : gamePanel.selectedPiece.getMoves()){
-                if(Arrays.equals(a, new int[]{mouseY / 100, mouseX / 100}) && ( Board.board[mouseY/100][mouseX/100] == null || Character.isUpperCase(Board.board[mouseY/100][mouseX/100].name) != Character.isUpperCase(Board.board[gamePanel.selectedPiece.y][gamePanel.selectedPiece.x].name))) {
+                if(Arrays.equals(a, new int[]{mouseY / 100, mouseX / 100}) ) {
                     Board.board[mouseY/100][mouseX/100] = gamePanel.selectedPiece;
                     Board.board[gamePanel.selectedPiece.x][gamePanel.selectedPiece.y] = null;
                     gamePanel.selectedPiece.x = mouseY/100;

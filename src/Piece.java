@@ -10,20 +10,20 @@ public abstract class Piece {
         this.y = y;
     }
 
-    public ArrayList<int[]> getMoves(){
-        return new ArrayList<>();
-    }
+    public abstract ArrayList<int[]> getMoves();
 
     protected ArrayList<int[]> getDir(int sx, int sy, int stepx, int stepy){
         ArrayList<int[]> moves = new ArrayList<>();
         for(int x = sx + stepx, y = sy + stepy;x >= 0 && y >= 0 && x < 8 && y < 8;x += stepx, y += stepy){
-            moves.add(new int[]{x, y});
-
             if(Board.board[x][y] != null){
+                if(Board.board[x][y].getColor() != this.getColor()) moves.add(new int[]{x, y});
                 break;
             }
-
+            moves.add(new int[]{x, y});
         }
         return moves;
+    }
+    public boolean getColor(){
+        return Character.isUpperCase(name);
     }
 }
