@@ -1,44 +1,42 @@
-# ♟️ **Ultimate Chess Battle** 🎮
+# ♟️ **Simple Chess Game** 🎮
 
-(chatgpt generated)
-_A thrilling new chess experience like no other!_
+_A straightforward, no-frills chess game for players of all levels._
 
 ![Chess Game Banner](https://example.com/chess-banner.png) <!-- Replace with your image link -->
 
 ## 🚀 **Game Overview**
-Ultimate Chess Battle reimagines the classic game of chess with **stunning visuals**, **dynamic gameplay**, and **multiplayer modes**. Whether you're a grandmaster or just getting started, our game offers something for everyone.
+Simple Chess Game brings the timeless classic of chess to your screen with easy-to-use controls and smooth gameplay. Perfect for beginners looking to learn and for casual players to enjoy quick matches against the AI.
 
 ### 🎯 **Features**
-- **3D Graphics**: Immerse yourself in beautifully rendered chess boards and pieces.
-- **Single & Multiplayer Modes**: Play against the AI or challenge players worldwide.
-- **Customizable Boards & Pieces**: Personalize your chess experience.
-- **Interactive Tutorials**: Learn chess through step-by-step guides.
-- **Ranked Matches**: Climb the global leaderboard and earn achievements.
+- **Classic Chess Rules**: Play chess with all the standard rules and move sets.
+- **Single-Player Mode**: Play against an AI opponent with adjustable difficulty.
+- **Clean & Minimalist Design**: Focus on the game with a simple and intuitive interface.
+- **Undo Moves**: Take back a move if you made a mistake.
+- **Hints & Tips**: Optional in-game hints to help you improve your strategy.
 
-![3D Chess Gameplay](https://example.com/chess-gameplay.png) <!-- Replace with your image link -->
+![Chess Gameplay](https://example.com/chess-gameplay.png) <!-- Replace with your image link -->
 
 ## 🕹️ **How to Play**
 1. **Download & Install** the game [here](https://example.com/download).
-2. **Create an Account** or play as a guest.
-3. **Select a Game Mode**: Play online, against AI, or locally with friends.
-4. **Move your pieces** using classic chess rules.
-5. **Win** by checkmating your opponent!
+2. **Start a New Game** and choose your difficulty level.
+3. **Move your pieces** by clicking and dragging them across the board.
+4. **Checkmate** your opponent to win!
 
-### ⚔️ **Game Modes**
-- **Classic Chess**: Traditional rules with a twist of modern visuals.
-- **Speed Chess**: Fast-paced matches where every second counts.
-- **Custom Challenges**: Play unique boards or set up specific scenarios.
-- **Tournaments**: Compete in global competitions for rewards!
+### 🔍 **Game Details**
+- **Single-Player Mode**: Face off against an AI opponent with various difficulty settings.
+- **Classic Mode**: Play chess with the standard 8x8 board and pieces.
+- **Move History**: Track every move made in the game for review.
+- **Sound Effects**: Enjoy subtle sound effects for every move.
 
-![Game Modes](https://example.com/chess-modes.png) <!-- Replace with your image link -->
+![Game Board](https://example.com/chess-board.png) <!-- Replace with your image link -->
 
 ## 🛠️ **Installation**
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/ultimate-chess-battle.git
+git clone https://github.com/yourusername/simple-chess-game.git
 
 # Navigate to the project directory
-cd ultimate-chess-battle
+cd simple-chess-game
 
 # Install dependencies
 npm install
