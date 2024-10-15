@@ -3,6 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class GamePanel extends JPanel implements Runnable{
@@ -11,8 +12,8 @@ public class GamePanel extends JPanel implements Runnable{
     int screenWidth, screenHeight, tileSize;
     Color tileColor1, tileColor2;
     //starting pos: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"
-    //test pos:"3r3K/8/4brKp/ppp3pp/1p1p1p1p/rRrR3R/bNnnNb2/bKqQk3"
-    String FEIN = "3r3K/8/4brKp/ppp3pp/1p1p1p1p/rRrR3R/bNnnNb2/bKqQk3";
+    //test pos:"3r3K/b5Bp/4brKp/ppp3pp/1p1p1p1p/rRrR3R/bNnnNb2/bKqQk3"
+    String FEIN = "rnbqk3/1B6/7P/8/5K2/2n5/5pb1/8";
     Piece selectedPiece = null;
     GamePanel(Input input, int screenWidth, int screenHeight){
         initImages();
@@ -55,14 +56,31 @@ public class GamePanel extends JPanel implements Runnable{
         }
     }
     public void update(){
-
+        FEIN = getFENString();
     }
+
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         paintTiles(g);
         paintCoords(g);
+        drawMoves(g);
         drawPieces(g);
+
     }
+
+
+    public void drawMoves(Graphics g){
+        if(selectedPiece != null){
+            ArrayList<int[]> moves = selectedPiece.getMoves();
+
+            for(int[] coord : moves){
+
+                g.drawImage(ImageManager.hawktuahcaptureonthatthang, (coord[1])*100, (coord[0])*100, tileSize, tileSize, null);
+
+            }
+        }
+    }
+
     public void setBoard(){
         for (int i = 0, r = 0, c = 0; i < FEIN.length(); i++, c++) {
             if (Character.isDigit(FEIN.charAt(i))) {
@@ -104,16 +122,36 @@ public class GamePanel extends JPanel implements Runnable{
             };
         }
     }
-    public String getFENString(){
+    public String getFENString() {
         StringBuilder fen = new StringBuilder();
-        for(int i = 0 ; i < 8; i++){
-            for(int j = 0 ; j < 8; j++){
-                fen.append(Board.board[i][j].name);
+
+        for (int i = 0; i < Board.board.length; i++) {
+            int emptyCount = 0;
+
+            for (int j = 0; j < Board.board[i].length; j++) {
+                if (Board.board[i][j] == null) {
+                    emptyCount++;
+                } else {
+                    if (emptyCount > 0) {
+                        fen.append(emptyCount);
+                        emptyCount = 0;
+                    }
+                    fen.append(Board.board[i][j].name);
+                }
+            }
+
+            if (emptyCount > 0) {
+                fen.append(emptyCount);
+            }
+
+            if (i < Board.board.length - 1) {
+                fen.append("/");
             }
         }
         FEIN = fen.toString();
         return fen.toString();
     }
+
     public void drawPieces(Graphics g) {
         for (int i = 0, r = 0, c = 0; i < FEIN.length(); i++, c++) {
             BufferedImage dp;
@@ -195,6 +233,7 @@ public class GamePanel extends JPanel implements Runnable{
             ImageManager.wP = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/WhitePawn.png")));
             ImageManager.wQ = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/WhiteQueen.png")));
             ImageManager.wR = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/WhiteRook.png")));
+            ImageManager.hawktuahcaptureonthatthang = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/GreyCircle.png")));
 
         }catch(IOException ignored){}
     }

@@ -1,8 +1,12 @@
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Arrays;
+import java.util.Objects;
 
 public class Input implements MouseListener {
     GamePanel gamePanel;
+    int mouseX, mouseY;
+    int Xoff = -10, Yoff = -30;
     public void setGamePanel(GamePanel gamePanel){
         this.gamePanel = gamePanel;
     }
@@ -13,7 +17,27 @@ public class Input implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        gamePanel.selectedPiece = Board.board[e.getY()][e.getX()];
+        mouseX = e.getX() + Xoff;
+        mouseY = e.getY() + Yoff;
+        if(gamePanel.selectedPiece == null)
+            gamePanel.selectedPiece = Board.board[mouseY/100][mouseX/100];
+        else{
+            boolean f = false;
+            for(int[] a : gamePanel.selectedPiece.getMoves()){
+                if(Arrays.equals(a, new int[]{mouseY / 100, mouseX / 100})) {
+                    Board.board[mouseY/100][mouseX/100] = gamePanel.selectedPiece;
+                    Board.board[gamePanel.selectedPiece.x][gamePanel.selectedPiece.y] = null;
+                    gamePanel.selectedPiece.x = mouseY/100;
+                    gamePanel.selectedPiece.y = mouseX/100;
+                    if(gamePanel.selectedPiece instanceof Pawn) ((Pawn) gamePanel.selectedPiece).firstMove = false;
+
+                    gamePanel.selectedPiece = null;
+                    f = true;
+                }
+
+            }
+            if(!f) gamePanel.selectedPiece = null;
+        }
     }
 
     @Override

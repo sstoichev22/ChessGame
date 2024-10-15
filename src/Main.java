@@ -7,6 +7,7 @@ public class Main {
         GamePanel gamePanel = new GamePanel(input, 800, 800);
         input.setGamePanel(gamePanel);
         frame.add(gamePanel);
+        frame.addMouseListener(input);
 
         frame.pack();
         frame.setLocationRelativeTo(null);

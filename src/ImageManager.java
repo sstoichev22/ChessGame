@@ -13,6 +13,6 @@ public class ImageManager {
     public static BufferedImage wP;
     public static BufferedImage wQ;
     public static BufferedImage wR;
-
+    public static BufferedImage hawktuahcaptureonthatthang;
 
 }
