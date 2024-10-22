@@ -30,7 +30,7 @@ public class King extends Piece{
         d.add(d4);
 
         for(ArrayList<int[]> arr : d){
-            if(Board.board[arr.getLast()[1]][arr.getLast()[0]] != null && Character.toLowerCase(Board.board[arr.getLast()[1]][arr.getLast()[0]].name) == 'b' || Character.toLowerCase(Board.board[arr.getLast()[0]][arr.getLast()[1]].name) == 'q'){
+            if(!arr.isEmpty() && Board.board[arr.get(arr.size()-1)[1]][arr.get(arr.size()-1)[0]] != null && (Character.toLowerCase(Board.board[arr.get(arr.size()-1)[1]][arr.get(arr.size()-1)[0]].name) == 'b' || Character.toLowerCase(Board.board[arr.get(arr.size()-1)[1]][arr.get(arr.size()-1)[0]].name) == 'q')){
                 return true;
             }
         }
@@ -46,7 +46,7 @@ public class King extends Piece{
         v.add(h2);
 
         for(ArrayList<int[]> arr : v){
-            if(Board.board[arr.getLast()[1]][arr.getLast()[0]] != null && Character.toLowerCase(Board.board[arr.getLast()[1]][arr.getLast()[0]].name) == 'r' || Character.toLowerCase(Board.board[arr.getLast()[0]][arr.getLast()[1]].name) == 'q'){
+            if(!arr.isEmpty() && Board.board[arr.get(arr.size()-1)[1]][arr.get(arr.size()-1)[0]] != null && (Character.toLowerCase(Board.board[arr.get(arr.size()-1)[1]][arr.get(arr.size()-1)[0]].name) == 'r' || Character.toLowerCase(Board.board[arr.get(arr.size()-1)[0]][arr.get(arr.size()-1)[1]].name) == 'q')){
                 return true;
             }
         }

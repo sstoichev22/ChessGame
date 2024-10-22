@@ -188,7 +188,7 @@ public class GamePanel extends JPanel implements Runnable{
         }
         for(Piece[] arr : Board.board){
             for(Piece p : arr){
-                if(Character.toLowerCase(p.name) == 'k'){
+                if(p != null && Character.toLowerCase(p.name) == 'k'){
                     System.out.println(((King) p).checked());
                 }
             }
