@@ -17,4 +17,42 @@ public class King extends Piece{
         }
         return list;
     }
+
+    public boolean checked() {
+        ArrayList<int[]> d1 = getDir(this.x, this.y, 1, 1);
+        ArrayList<int[]> d2 = getDir(this.x, this.y, -1, 1);
+        ArrayList<int[]> d3 = getDir(this.x, this.y, -1, -1);
+        ArrayList<int[]> d4 = getDir(this.x, this.y, 1, -1);
+        ArrayList<ArrayList<int[]>> d = new ArrayList<>();
+        d.add(d1);
+        d.add(d2);
+        d.add(d3);
+        d.add(d4);
+
+        for(ArrayList<int[]> arr : d){
+            if(Board.board[arr.getLast()[1]][arr.getLast()[0]] != null && Character.toLowerCase(Board.board[arr.getLast()[1]][arr.getLast()[0]].name) == 'b' || Character.toLowerCase(Board.board[arr.getLast()[0]][arr.getLast()[1]].name) == 'q'){
+                return true;
+            }
+        }
+
+        ArrayList<int[]> v1 = getDir(this.x, this.y, 0, 1);
+        ArrayList<int[]> v2 = getDir(this.x, this.y, 0, -1);
+        ArrayList<int[]> h1 = getDir(this.x, this.y, 1, 0);
+        ArrayList<int[]> h2 = getDir(this.x, this.y, -1, 0);
+        ArrayList<ArrayList<int[]>> v = new ArrayList<>();
+        v.add(v1);
+        v.add(v2);
+        v.add(h1);
+        v.add(h2);
+
+        for(ArrayList<int[]> arr : v){
+            if(Board.board[arr.getLast()[1]][arr.getLast()[0]] != null && Character.toLowerCase(Board.board[arr.getLast()[1]][arr.getLast()[0]].name) == 'r' || Character.toLowerCase(Board.board[arr.getLast()[0]][arr.getLast()[1]].name) == 'q'){
+                return true;
+            }
+        }
+
+
+
+        return false;
+    }
 }
