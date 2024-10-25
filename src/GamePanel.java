@@ -9,7 +9,8 @@ import java.util.Objects;
 public class GamePanel extends JPanel implements Runnable{
     Thread gameThread;
     Input input;
-    int screenWidth, screenHeight, tileSize;
+    Rectangle playButton;
+    int screenWidth, screenHeight, tileSize, gameState = 0;
     Color tileColor1, tileColor2;
     String startPos = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
     //test pos:"3r3K/b5Bp/4brKp/ppp3pp/1p1p1p1p/rRrR3R/bNnnNb2/bKqQk3", "rnbqk3/1B6/7P/8/5K2/2n5/5pb1/8"
@@ -22,6 +23,7 @@ public class GamePanel extends JPanel implements Runnable{
         tileSize = 100;
         tileColor1 = new Color(196, 164, 132);
         tileColor2 = new Color(92, 64, 51);
+        playButton = new Rectangle(screenWidth/2 - 50, screenHeight/2 - 25, 100, 100);
         setBoard();
     }
     @Override
@@ -60,11 +62,25 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
     public void paintComponent(Graphics g){
-        super.paintComponent(g);
-        paintTiles(g);
-        paintCoords(g);
-        drawMoves(g);
-        drawPieces(g);
+        switch(gameState){
+            case 0:
+                g.setFont(new Font("Georgia", Font.BOLD, 100));
+                g.drawString("CHESS", 150, 250);
+                g.setFont(new Font("Georgia", Font.BOLD, 15));
+                g.drawString("start", playButton.x + 30, playButton.y + 50);
+                g.drawRect(playButton.x, playButton.y, playButton.width, playButton.height);
+                g.drawImage(ImageManager.cagnusMarlson, 100, 500, 600, 100, null);
+                break;
+            case 1:
+                super.paintComponent(g);
+                paintTiles(g);
+                paintCoords(g);
+                drawMoves(g);
+                drawPieces(g);
+                break;
+
+        }
+
 
     }
 
@@ -234,6 +250,7 @@ public class GamePanel extends JPanel implements Runnable{
             ImageManager.wQ = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/WhiteQueen.png")));
             ImageManager.wR = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/WhiteRook.png")));
             ImageManager.hawktuahcaptureonthatthang = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/GreyCircle.png")));
+            ImageManager.cagnusMarlson = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/maxresdefault.png")));
 
         }catch(IOException ignored){}
     }
