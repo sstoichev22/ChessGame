@@ -13,6 +13,7 @@ public class GamePanel extends JPanel implements Runnable{
     int screenWidth, screenHeight, tileSize, gameState = 0;
     Color tileColor1, tileColor2;
     String startPos = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
+    ArrayList<int[]> kings = new ArrayList<>();
     //test pos:"3r3K/b5Bp/4brKp/ppp3pp/1p1p1p1p/rRrR3R/bNnnNb2/bKqQk3", "rnbqk3/1B6/7P/8/5K2/2n5/5pb1/8"
     String FEIN = startPos;
     Piece selectedPiece = null;
@@ -87,11 +88,11 @@ public class GamePanel extends JPanel implements Runnable{
 
     public void drawMoves(Graphics g){
         if(selectedPiece != null){
-            ArrayList<int[]> moves = selectedPiece.getMoves();
+            ArrayList<Point> moves = selectedPiece.getMoves();
 
-            for(int[] coord : moves){
+            for(Point coord : moves){
 
-                g.drawImage(ImageManager.hawktuahcaptureonthatthang, (coord[1])*100, (coord[0])*100, tileSize, tileSize, null);
+                g.drawImage(ImageManager.hawktuahcaptureonthatthang, (coord.y)*100, (coord.x)*100, tileSize, tileSize, null);
 
             }
         }
@@ -116,6 +117,7 @@ public class GamePanel extends JPanel implements Runnable{
                 case 'k':
                 case 'K':
                     Board.board[r][c] = new King(FEIN.charAt(i), r, c);
+                    kings.add(new int[]{r, c});
                     break;
                 case 'n':
                 case 'N':
@@ -169,6 +171,7 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
     public void drawPieces(Graphics g) {
+
         for (int i = 0, r = 0, c = 0; i < FEIN.length(); i++, c++) {
             BufferedImage dp;
             if (Character.isDigit(FEIN.charAt(i))) {
@@ -197,6 +200,13 @@ public class GamePanel extends JPanel implements Runnable{
             };
             if (dp != null) {
                 g.drawImage(dp, tileSize * c, tileSize * r, tileSize, tileSize, null);
+            }
+        }
+        for(Piece[] arr : Board.board){
+            for(Piece p : arr){
+                if(p != null && Character.toLowerCase(p.name) == 'k'){
+                    System.out.println(((King) p).checked());
+                }
             }
         }
     }

@@ -5,8 +5,8 @@ public class Bishop extends Piece{
         super(name, x, y);
     }
 
-    public ArrayList<int[]> getMoves(){
-        ArrayList<int[]> moves = new ArrayList<>();
+    public ArrayList<Point> getMoves(){
+        ArrayList<Point> moves = new ArrayList<>();
 
         moves.addAll(getDir(this.x, this.y, 1, 1));
         moves.addAll(getDir(this.x, this.y, -1, 1));

@@ -1,7 +1,6 @@
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Arrays;
-import java.util.Objects;
 
 public class Input implements MouseListener {
     GamePanel gamePanel;
@@ -30,8 +29,8 @@ public class Input implements MouseListener {
                     gamePanel.selectedPiece = Board.board[mouseY/100][mouseX/100];
                 else{
                     boolean f = false;
-                    for(int[] a : gamePanel.selectedPiece.getMoves()){
-                        if(Arrays.equals(a, new int[]{mouseY / 100, mouseX / 100}) ) {
+                    for(Point a : gamePanel.selectedPiece.getMoves()){
+                        if(Arrays.equals(new int[]{a.x, a.y}, new int[]{mouseY / 100, mouseX / 100}) ) {
                             Board.board[mouseY/100][mouseX/100] = gamePanel.selectedPiece;
                             Board.board[gamePanel.selectedPiece.x][gamePanel.selectedPiece.y] = null;
                             gamePanel.selectedPiece.x = mouseY/100;
@@ -41,8 +40,6 @@ public class Input implements MouseListener {
                             gamePanel.selectedPiece = null;
                             f = true;
                             whiteTurn = !whiteTurn;
-                        }
-
                     }
                     if(!f) gamePanel.selectedPiece = null;
                 }
