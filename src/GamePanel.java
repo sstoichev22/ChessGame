@@ -72,11 +72,11 @@ public class GamePanel extends JPanel implements Runnable{
 
     public void drawMoves(Graphics g){
         if(selectedPiece != null){
-            ArrayList<int[]> moves = selectedPiece.getMoves();
+            ArrayList<Point> moves = selectedPiece.getMoves();
 
-            for(int[] coord : moves){
+            for(Point coord : moves){
 
-                g.drawImage(ImageManager.hawktuahcaptureonthatthang, (coord[1])*100, (coord[0])*100, tileSize, tileSize, null);
+                g.drawImage(ImageManager.hawktuahcaptureonthatthang, (coord.y)*100, (coord.x)*100, tileSize, tileSize, null);
 
             }
         }
