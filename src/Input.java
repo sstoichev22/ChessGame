@@ -18,34 +18,36 @@ public class Input implements MouseListener {
     public void mousePressed(MouseEvent e) {
         mouseX = e.getX() + Xoff;
         mouseY = e.getY() + Yoff;
-        switch(gamePanel.gameState){
+        switch (gamePanel.gameState) {
             case 0:
-                if(gamePanel.playButton.contains(mouseX, mouseY)){
+                if (gamePanel.playButton.contains(mouseX, mouseY)) {
                     gamePanel.gameState = 1;
                 }
                 break;
             case 1:
-                if(gamePanel.selectedPiece == null && Character.isUpperCase(Board.board[mouseY/100][mouseX/100].name) == whiteTurn)
-                    gamePanel.selectedPiece = Board.board[mouseY/100][mouseX/100];
-                else{
+                if (gamePanel.selectedPiece == null && Character.isUpperCase(Board.board[mouseY / 100][mouseX / 100].name) == whiteTurn)
+                    gamePanel.selectedPiece = Board.board[mouseY / 100][mouseX / 100];
+                else {
                     boolean f = false;
-                    for(Point a : gamePanel.selectedPiece.getMoves()){
-                        if(Arrays.equals(new int[]{a.x, a.y}, new int[]{mouseY / 100, mouseX / 100}) ) {
-                            Board.board[mouseY/100][mouseX/100] = gamePanel.selectedPiece;
+                    for (Point a : gamePanel.selectedPiece.getMoves()) {
+                        if (Arrays.equals(new int[]{a.x, a.y}, new int[]{mouseY / 100, mouseX / 100})) {
+                            Board.board[mouseY / 100][mouseX / 100] = gamePanel.selectedPiece;
                             Board.board[gamePanel.selectedPiece.x][gamePanel.selectedPiece.y] = null;
-                            gamePanel.selectedPiece.x = mouseY/100;
-                            gamePanel.selectedPiece.y = mouseX/100;
-                            if(gamePanel.selectedPiece instanceof Pawn) ((Pawn) gamePanel.selectedPiece).firstMove = false;
+                            gamePanel.selectedPiece.x = mouseY / 100;
+                            gamePanel.selectedPiece.y = mouseX / 100;
+                            if (gamePanel.selectedPiece instanceof Pawn)
+                                ((Pawn) gamePanel.selectedPiece).firstMove = false;
 
                             gamePanel.selectedPiece = null;
                             f = true;
                             whiteTurn = !whiteTurn;
+                        }
+                        if (!f) gamePanel.selectedPiece = null;
                     }
-                    if(!f) gamePanel.selectedPiece = null;
+                    break;
                 }
-                break;
-        }
 
+        }
     }
 
     @Override
