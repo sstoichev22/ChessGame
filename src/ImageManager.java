@@ -14,5 +14,6 @@ public class ImageManager {
     public static BufferedImage wQ;
     public static BufferedImage wR;
     public static BufferedImage hawktuahcaptureonthatthang;
+    public static BufferedImage cagnusMarlson;
 
 }
