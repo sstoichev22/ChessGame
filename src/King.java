@@ -14,7 +14,7 @@ public class King extends Piece{
         int[] dy = {1, 1, 1, 0, 0, -1, -1, -1};
         for(int i = 0 ; i < 8; i++){
             if(this.x + dx[i] >= 0 && this.x + dx[i] < 8 && this.y + dy[i] >= 0 && this.y + dy[i] < 8)
-                if(Board.board[this.x+dx[i]][this.y+dy[i]] != null && Board.board[this.x+dx[i]][this.y+dy[i]].getColor() != this.getColor())
+                if(Board.board[this.x+dx[i]][this.y+dy[i]] == null || Board.board[this.x+dx[i]][this.y+dy[i]].getColor() != this.getColor())
                     list.add(new Point(this.x + dx[i], this.y + dy[i]));
         }
         return list;
