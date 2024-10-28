@@ -18,8 +18,8 @@ public class Pawn extends Piece{
             if (Board.board[this.x + isWhite][this.y] == null) list.add(new Point(this.x + isWhite, this.y));
             if (firstMove && Board.board[this.x + isWhite * 2][this.y] == null)
                 list.add(new Point(this.x + isWhite * 2, this.y));
-            if (Board.board[this.x + isWhite][this.y + 1] != null) list.add(new Point(this.x + isWhite, this.y + 1));
-            if (Board.board[this.x + isWhite][this.y - 1] != null) list.add(new Point(this.x + isWhite, this.y - 1));
+            if (this.y + 1 < 8 && Board.board[this.x + isWhite][this.y + 1] != null) list.add(new Point(this.x + isWhite, this.y + 1));
+            if (this.y - 1 > -1 &&Board.board[this.x + isWhite][this.y - 1] != null) list.add(new Point(this.x + isWhite, this.y - 1));
         }
         return list;
     }
