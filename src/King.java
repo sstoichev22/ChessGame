@@ -20,7 +20,7 @@ public class King extends Piece{
         return list;
     }
 
-    public boolean isChecked(){
+    public boolean checked(){
         ArrayList<Point> list = new ArrayList<>();
         boolean checked = false;
         //rook and queen dirs
@@ -49,9 +49,5 @@ public class King extends Piece{
         if (p.x - 1 >= 0 && p.y + (!getColor() ? 1 : -1) >= 0 && p.y + (!getColor() ? 1 : -1) < 8 && Board.board[p.x - 1][p.y + (!getColor() ? 1 : -1)] instanceof Pawn && Board.board[p.x - 1][p.y + (!getColor() ? 1 : -1)].isOppositeColor(this))
             checked = true;
         return checked;
-    }
-
-    public boolean checked() {
-        return false;
     }
 }

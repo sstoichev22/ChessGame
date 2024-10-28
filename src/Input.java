@@ -40,6 +40,16 @@ public class Input implements MouseListener {
                             gamePanel.selectedPiece = null;
                             f = true;
                             whiteTurn = !whiteTurn;
+                            if(gamePanel.wCLM && gamePanel.wK.checked()){
+                                gamePanel.gameState = 3;
+                            }
+                            if(gamePanel.bCLM && gamePanel.bK.checked()){
+                                gamePanel.gameState = 4;
+                            }
+                            gamePanel.wCLM =gamePanel.wK.checked();
+                            gamePanel.bCLM =gamePanel.bK.checked();
+
+
                         }
 
                     }

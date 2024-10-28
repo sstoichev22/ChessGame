@@ -17,6 +17,8 @@ public class GamePanel extends JPanel implements Runnable{
     //test pos:"3r3K/b5Bp/4brKp/ppp3pp/1p1p1p1p/rRrR3R/bNnnNb2/bKqQk3", "rnbqk3/1B6/7P/8/5K2/2n5/5pb1/8"
     String FEIN = startPos;
     Piece selectedPiece = null;
+    boolean wCLM = false, bCLM = false;
+    King bK, wK;
     GamePanel(Input input, int screenWidth, int screenHeight){
         initImages();
         this.input = input;
@@ -79,7 +81,14 @@ public class GamePanel extends JPanel implements Runnable{
                 drawMoves(g);
                 drawPieces(g);
                 break;
-
+            case 3:
+                g.setFont(new Font("Georgia", Font.BOLD, 100));
+                g.drawString("BLACK WINS", 50, 250);
+                break;
+            case 4:
+                g.setFont(new Font("Georgia", Font.BOLD, 100));
+                g.drawString("WHITE WINS", 50, 250);
+                break;
         }
 
 
@@ -115,9 +124,12 @@ public class GamePanel extends JPanel implements Runnable{
                     Board.board[r][c] = new Bishop(FEIN.charAt(i), r, c);
                     break;
                 case 'k':
+                    Board.board[r][c] = new King(FEIN.charAt(i), r, c);
+                    bK = (King) Board.board[r][c];
+                    break;
                 case 'K':
                     Board.board[r][c] = new King(FEIN.charAt(i), r, c);
-                    kings.add(new int[]{r, c});
+                    wK = (King) Board.board[r][c];
                     break;
                 case 'n':
                 case 'N':
@@ -260,7 +272,7 @@ public class GamePanel extends JPanel implements Runnable{
             ImageManager.wQ = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/WhiteQueen.png")));
             ImageManager.wR = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/WhiteRook.png")));
             ImageManager.hawktuahcaptureonthatthang = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/GreyCircle.png")));
-            ImageManager.cagnusMarlson = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/maxresdefault.png")));
+            ImageManager.cagnusMarlson = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/ezgif-4-a5ed78d5cb.png")));
 
         }catch(IOException ignored){}
     }
