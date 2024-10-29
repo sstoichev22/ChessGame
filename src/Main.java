@@ -10,6 +10,7 @@ public class Main {
         frame.addMouseListener(input);
 
         frame.pack();
+        frame.setIconImage(ImageManager.cagnusMarlson);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
