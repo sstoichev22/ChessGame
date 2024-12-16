@@ -43,3 +43,8 @@ npm install
 
 # Start the game
 npm start
+
+```
+I ChatGPT'd this readME, just download the project and run the main file
+Scotch game on top 
+```
